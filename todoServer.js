@@ -7,7 +7,7 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
-// Returns a list of all todo items.
+// Fetches the data from todos.json file and returns a list of all todo items
 app.get('/todos', (req, res) => {
     fs.readFile("todos.json", "utf-8", (err, data) => {
         if (err)
@@ -17,7 +17,7 @@ app.get('/todos', (req, res) => {
     })
 })
 
-// Returns a specific todo item identified by its ID
+// Fetches the data from todos.json file and returns a specific todo item identified by its ID
 app.get('/todos/:id', (req, res) => {
     fs.readFile("todos.json", "utf-8", (err, data) => {
         if (err)
@@ -36,7 +36,7 @@ app.get('/todos/:id', (req, res) => {
 })
 
 
-// Creates a new todo item
+// Fetches the data from todos.json file, Creates a new todo item and appends it to the file
 app.post('/todos', (req, res) => {
     const newTodo = {
         id: Math.floor(Math.random() * 1000000),
@@ -59,7 +59,7 @@ app.post('/todos', (req, res) => {
     })
 })
 
-// Update an existing todo item by ID
+// Fetches the data from todos.json file and updates an existing todo item identified by ID
 app.put('/todos/:id', (req, res) => {
     fs.readFile("todos.json", "utf-8", (err, data) => {
         if (err)
@@ -88,7 +88,7 @@ app.put('/todos/:id', (req, res) => {
     })
 })
 
-// Deletes a todo item identified by its ID
+// Fetches the data from the todos.json file and deletes a todo item identified by its ID
 app.delete('/todos/:id', (req, res) => {
     fs.readFile("todos.json", "utf-8", (err, data) => {
         if (err)
@@ -114,15 +114,15 @@ app.delete('/todos/:id', (req, res) => {
     })
 })
 
-// For any other route not defined in the server return 404
+// For any other route not defined in the server it returns 404
 app.get('*', (req, res) => {
     res.sendStatus(404);
 })
 
 // App is listening on port 3000, change at the top if needed
-// listen() is being ran from the test so don't run it else error
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`);
 });
 
+// exporting it if need to run any test cases
 module.exports = app;
